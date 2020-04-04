@@ -29,7 +29,7 @@ end
 # unset irrelevant variables
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/Users/mac/Documents/adoo/djangoproject/myproject"
+set -gx VIRTUAL_ENV "/Users/mac/Documents/adoo/djangoproject/adtomin/myproject"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH

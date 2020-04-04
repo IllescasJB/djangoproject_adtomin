@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/mac/Documents/adoo/djangoproject/myproject"
+VIRTUAL_ENV="/Users/mac/Documents/adoo/djangoproject/adtomin/myproject"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

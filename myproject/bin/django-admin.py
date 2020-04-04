@@ -1,4 +1,4 @@
-#!/Users/mac/Documents/adoo/djangoproject/myproject/bin/python3.7
+#!/Users/mac/Documents/adoo/djangoproject/adtomin/myproject/bin/python3.7
 from django.core import management
 
 if __name__ == "__main__":
