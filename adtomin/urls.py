@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^usuarios/', include('AdTominApps.users.urls', namespace="usuarios")),
     url(r'^welcome',login_required(views.welcome)),
     url(r'^register',views.RegistroUsuario.as_view(), name="registrar"),
+    url(r'^$', login, {'template_name':'web/login.html'}, name='login'),
     url(r'^accounts/login/', login, {'template_name':'web/login.html'}, name='login'),
     url(r'^logout/', logout_then_login, name='logout'),
     url(r'^reset/password_reset', password_reset, {'template_name':'web/register/forgot-password.html','email_template_name':'web/register/password_reset_email.html'}, name='password_reset'),
