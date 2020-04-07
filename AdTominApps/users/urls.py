@@ -1,6 +1,7 @@
 from django.conf.urls import include, url
-from AdTominApps.users.views import index_usuario
+from django.contrib.auth.decorators import login_required
+
 
 urlpatterns = [
-    url(r'^index$', index_usuario),
+
 ]
