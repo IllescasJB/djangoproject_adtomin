@@ -13,7 +13,7 @@ function ADTString()/*{{{*/
    	{
        	//************************************PROD***********************************
        	this.serviceHost      = 'http://adtomin.pythonanywhere.com' 
-        this.AdTominPort      = '8000'
+        this.AdTominPort      = ''
    	}
 }
 
