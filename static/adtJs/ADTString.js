@@ -1,7 +1,7 @@
 function ADTString()/*{{{*/
 {
 	this.webVersion           = '1.0.2'
-  this.isProd               = true;
+  this.isProd               = false;
 
    	if(!this.isProd)
    	{
@@ -12,7 +12,7 @@ function ADTString()/*{{{*/
    	else
    	{
        	//************************************PROD***********************************
-       	this.serviceHost      = 'http://adtomin.pythonanywhere.com' 
+       	this.serviceHost      = 'adtomin.pythonanywhere.com' 
         this.AdTominPort      = ''
    	}
 }
