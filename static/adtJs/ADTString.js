@@ -1,7 +1,7 @@
 function ADTString()/*{{{*/
 {
 	this.webVersion           = '1.0.2'
-  this.isProd               = false;
+  this.isProd               = true;
 
    	if(!this.isProd)
    	{
