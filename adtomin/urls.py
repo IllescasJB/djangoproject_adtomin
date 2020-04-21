@@ -21,17 +21,23 @@ from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^adtomin/', include('AdTominApps.expenses.urls', namespace="gastos")),
-    url(r'^usuarios/', include('AdTominApps.users.urls', namespace="usuarios")),
-    url(r'^welcome',login_required(views.welcome)),
-    url(r'^register',views.RegistroUsuario.as_view(), name="registrar"),
-    url(r'^$', login, {'template_name':'web/login.html'}, name='login'),
+    url(r'^home',login_required(views.welcome)),
+    #url(r'^register',views.RegistroUsuario.as_view(), name="registrar"),
+    url(r'^register',views.register, name="registrar"),
+    #url(r'^login', views.login,name='login'),
+    url(r'^$', login, {'template_name':'web/login.html'}),
     url(r'^accounts/login/', login, {'template_name':'web/login.html'}, name='login'),
     url(r'^logout/', logout_then_login, name='logout'),
     url(r'^reset/password_reset', password_reset, {'template_name':'web/register/forgot-password.html','email_template_name':'web/register/password_reset_email.html'}, name='password_reset'),
     url(r'^reset/password_reset_done', password_reset_done, {'template_name':'web/register/password_reset_done.html'}, name='password_reset_done'),
     url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>.+)/$', password_reset_confirm, {'template_name': 'web/register/password_reset_confirm.html'},name='password_reset_confirm'),
     url(r'^reset/done', password_reset_complete, {'template_name': 'web/register/password_reset_complete.html'},name='password_reset_complete'),
+    
+    url(r'^GetExpenses/',views.listExpenses, name="getExpenses"),
+    url(r'^AddExpense/',login_required(views.addExpense), name="addExpense"),
+    url(r'^UpdateExpense/',login_required(views.updateExpense), name="updateExpense"),
+    url(r'^DeleteExpense/',login_required(views.deleteExpense), name="deleteExpense"),
+    url(r'^SendBalance/',login_required(views.sendBalance), name="sendBalance"),
     #url(r'^login',views.login),
     #url(r'^logout',views.logout),
 ]

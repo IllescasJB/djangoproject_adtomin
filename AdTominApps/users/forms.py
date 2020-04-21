@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from AdTominApps.users.models import AdtUsers
 
 
 class RegistroForm(UserCreationForm):
@@ -13,8 +14,8 @@ class RegistroForm(UserCreationForm):
                 'email',
             ]
         labels = {
-                'username': 'Nombre de usuario',
-                'first_name': 'Nombre',
+                'username':'Nombre de Usuario',
+                'first_name': 'Nombres',
                 'last_name': 'Apellidos',
                 'email': 'Correo',
-        }
+             }
