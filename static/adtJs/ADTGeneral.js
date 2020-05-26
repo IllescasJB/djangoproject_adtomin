@@ -6,11 +6,13 @@ ADTGeneral.prototype.sideBar = function() {
 	var htmlContent= '';
 
 	htmlContent += '<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">';
-	htmlContent += '	<a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">';
+	htmlContent += '	<a class="sidebar-brand d-flex align-items-center justify-content-center" href="/home">';
 	htmlContent += '		<div class="sidebar-brand-icon rotate-n-15">';
-	htmlContent += '			<i class="fas fa-laugh-wink"></i>';
+	//htmlContent += '			<i class="fas fa-laugh-wink"></i>';
 	htmlContent += '		</div>';
-	htmlContent += '		<div class="sidebar-brand-text mx-3">AdTomin </div>';
+	htmlContent += '		<div class="sidebar-brand-text mx-3">';
+	htmlContent += '			<img src="static/adtImages/AdTomin_logo_white.png" class="logo">' 
+	htmlContent += '		</div>';
 	htmlContent += '	</a>';
 	htmlContent += '	<hr class="sidebar-divider my-0">';
 	htmlContent += '	<hr class="sidebar-divider">';
@@ -33,15 +35,9 @@ ADTGeneral.prototype.sideBar = function() {
 	htmlContent += '		</a>';
 	htmlContent += '	</li>';
 	htmlContent += '	<li class="nav-item">';
-	htmlContent += '		<a class="nav-link" onclick="adtSummary.summary();" href="#about">';
+	htmlContent += '		<a class="nav-link" onclick="adtExpenses.getExpenses();" href="/AboutUs" target="_blank">';
 	htmlContent += '			<i class="fas fa-fw fa-users menu"></i>';
 	htmlContent += '			<span class="menu">Sobre nosotros</span>';
-	htmlContent += '		</a>';
-	htmlContent += '	</li>';
-	htmlContent += '	<li class="nav-item">';
-	htmlContent += '		<a class="nav-link" onclick="adtSummary.summary();" href="#contact">';
-	htmlContent += '			<i class="fas fa-fw fa-envelope-open-text menu"></i>';
-	htmlContent += '			<span class="menu">Contacto</span>';
 	htmlContent += '		</a>';
 	htmlContent += '	</li>';
 	htmlContent += '	<hr class="sidebar-divider d-none d-md-block">';

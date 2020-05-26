@@ -59,7 +59,7 @@ ADTExpenses.prototype.expenseShow = function(id,expense,color){
 	htmlContent += '		<div class="modal-footer">';
 	htmlContent += '			<button onclick="adtExpenses.deleteExpense(\''+ id +'\');" style="background-color:#e74a3b;" class="btn btn-secondary" type="button" data-dismiss="modal">Eliminar cuenta</button>';
 	htmlContent += '			<button onclick="adtExpenses.expenseEdit(\''+ id +'\',\''+ expense +'\',\''+ color +'\',\'edit\');" class="btn btn-secondary" type="button" >Editar cuenta</button>';
-	htmlContent += '			<button onclick="adtExpenses.sendBalance(\''+ id +'\');" style="background-color:#1cc88a;" class="btn btn-secondary" type="button" data-dismiss="modal">Registrar gasto</button>';
+	htmlContent += '			<button onclick="adtExpenses.sendBalance(\''+ id +'\',\''+ expense +'\');" style="background-color:#1cc88a;" class="btn btn-secondary" type="button" data-dismiss="modal">Registrar gasto</button>';
 	htmlContent += '		</div>';
 	htmlContent += '	</div>';
 	htmlContent += '</div>';
@@ -183,7 +183,7 @@ ADTExpenses.prototype.expenseEdit = function(id,expense,color,action){
 	htmlContent += '		<div class="modal-footer">';
 	htmlContent += '			<button style="background-color:#e74a3b;" class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>';
 	if(action == 'edit'){
-		htmlContent += '		<button onclick="adtExpenses.updateExpense('+ id +')"; style="background-color:#1cc88a;" class="btn btn-secondary" type="button" data-dismiss="modal">Guardar</button>';
+		htmlContent += '		<button onclick="adtExpenses.updateExpense('+ id +',\''+ expense +'\')"; style="background-color:#1cc88a;" class="btn btn-secondary" type="button" data-dismiss="modal">Guardar</button>';
 	}else{
 		htmlContent += '		<button onclick="adtExpenses.addExpense()"; style="background-color:#1cc88a;" class="btn btn-secondary" type="button" data-dismiss="modal">Guardar</button>';
 	}
@@ -220,20 +220,31 @@ ADTExpenses.prototype.changeColorSelect = function(){
 
 ADTExpenses.prototype.addExpense = function(){
 
+	var date = new Date();
+    var mes = date.getMonth()+1;
+    var m = mes.toString();
+    if(m.length == 1){
+      m = '0' + m;
+    }
+
+    dateExpense = date.getDate() + "/" + m + "/" + date.getFullYear();
+
 	var params = '';
 
-	params += 'userName=' + window.USERNAME + '&description=' + $("#description").val() + '&balance=' + 0 + '&color=' + adtExpenses.color + '&icon=' + adtExpenses.icon;
+	params += 'userName=' + window.USERNAME + '&description=' + $("#description").val() + '&balance=' + 0 + '&color=' + adtExpenses.color + '&icon=' + adtExpenses.icon + '&date=' + dateExpense;
 	adtRequest.makeRequest('AddExpense',params);
 
 }
 
-ADTExpenses.prototype.updateExpense = function(id){
+ADTExpenses.prototype.updateExpense = function(id,expense){
 
 	console.log(id);
 	var params = '';
 
 	params += 'userName=' + window.USERNAME + '&description=' + $("#description").val() + '&color=' + adtExpenses.color + '&icon=' + adtExpenses.icon + '&expenseId=' + id;
 	adtRequest.makeRequest('UpdateExpense',params);
+	params += 'userName=' + window.USERNAME + '&descriptionSend=' + expense + '&description=' + $("#description").val();
+	adtRequest.makeRequest('UpdateExpenseDate',params);
 
 }
 
@@ -254,21 +265,33 @@ ADTExpenses.prototype.getExpenses = function(){
 
 }
 
-ADTExpenses.prototype.sendBalance = function(id){
+ADTExpenses.prototype.sendBalance = function(id,expense){
+
+	var date = new Date();
+    var mes = date.getMonth()+1;
+    var m = mes.toString();
+    if(m.length == 1){
+      m = '0' + m;
+    }
+
+    dateExpense = date.getDate() + "/" + m + "/" + date.getFullYear();
 
 	var params = ''; 
-	params += 'userName' + window.USERNAME + '&balance=' + $("#balance").val() + '&expenseId=' + id; 
+	params += 'userName=' + window.USERNAME + '&balance=' + $("#balance").val() + '&expenseId=' + id; 
 	adtRequest.makeRequest('SendBalance',params)
+	params += 'userName=' + window.USERNAME + '&balance=' + $("#balance").val() + '&description=' + expense + '&date=' + dateExpense;
+	adtRequest.makeRequest('SendBalanceDate',params)
 }
 
 ADTExpenses.prototype.pieChart = function() {
 
 	var htmlContent= '';
 
-	htmlContent += '<div id="pieChart" class="card shadow mb-4">';
+	htmlContent += '<div id="pieChart" class="conteiner card shadow mb-4">';
 	htmlContent += '	<div class="chart-pie pt-4 pb-2">';
-	htmlContent += '		<div id="chartContainer" style="height: 300px; width: 100%;"></div>';
+	htmlContent += '		<canvas id="chartContainer" style="height: 300px; width: 100%;"></canvas>';
 	htmlContent += '	</div>';
+	/*
 	htmlContent += '	<div class="mt-4 text-center small">';
 	htmlContent += '		<span class="mr-2">';
 	htmlContent += '			<i class="fas fa-circle text-primary"></i> Direct';
@@ -280,6 +303,7 @@ ADTExpenses.prototype.pieChart = function() {
 	htmlContent += '			<i class="fas fa-circle text-info"></i> Referral';
 	htmlContent += '		</span>';
 	htmlContent += '	</div>';
+	*/
 	htmlContent += '</div>';
 
 	document.getElementById("mainContent").innerHTML+= htmlContent;
@@ -287,31 +311,34 @@ ADTExpenses.prototype.pieChart = function() {
 }
 
 function chart(){
-
-	var chart = new CanvasJS.Chart("chartContainer", {
-		animationEnabled: true,
-		title:{
-			text: "",
-			horizontalAlign: "left"
-		},
-		data: [{
-			type: "doughnut",
-			startAngle: 60,
-			//innerRadius: 60,
-			indexLabelFontSize: 17,
-			indexLabel: "{label} - #percent%",
-			toolTipContent: "<b>{label}:</b> {y} (#percent%)",
-			dataPoints: [
-				{ y: 67, label: "Inbox" },
-				{ y: 28, label: "Archives" },
-				{ y: 10, label: "Labels" },
-				{ y: 7, label: "Drafts"},
-				{ y: 15, label: "Trash"},
-				{ y: 6, label: "Spam"}
-			]
-		}]
+	var ctx = document.getElementById("chartContainer");
+	var myChart = new Chart(ctx, {
+  		type: 'pie',
+  		data: {
+    		labels: ['OK', 'WARNING', 'CRITICAL', 'UNKNOWN'],
+    		datasets: [{
+      			label: '# of Tomatoes',
+      			data: [12, 19, 3, 5],
+      			backgroundColor: [
+        			'rgba(255, 99, 132, 0.5)',
+        			'rgba(54, 162, 235, 0.2)',
+        			'rgba(255, 206, 86, 0.2)',
+        			'rgba(75, 192, 192, 0.2)'
+      			],
+      			borderColor: [
+        			'rgba(255,99,132,1)',
+        			'rgba(54, 162, 235, 1)',
+        			'rgba(255, 206, 86, 1)',
+        			'rgba(75, 192, 192, 1)'
+      			],
+      			borderWidth: 1
+    		}]
+  		},
+  		options: {
+   			cutoutPercentage: 60,
+    		responsive: true,
+  		}
 	});
-	chart.render();
 }
 
 $(document).ready(function(){ 

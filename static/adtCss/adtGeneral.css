@@ -108,3 +108,12 @@
   background-color: #1cc88a;
   opacity:.70;
 }
+
+.logo{
+  width: 100px;
+  height: auto;
+}
+
+.conteiner{
+  height: 350px;
+}

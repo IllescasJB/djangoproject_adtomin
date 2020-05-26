@@ -16,3 +16,14 @@ class AdtExpenses(models.Model):
 	User				 = models.ForeignKey(User, null= True, blank= True, on_delete=models.CASCADE, verbose_name="Usuario")
 
 
+@python_2_unicode_compatible
+class AdtExpensesDate(models.Model):
+	vExpenseId           = models.AutoField(db_column='vExpenseId',primary_key= True)
+	vExpenseDescription  = models.CharField(max_length=100 ,blank=False, null=False, verbose_name="Descripción")
+	vExpenseBalance      = models.FloatField(blank=False, null=False, verbose_name="Balance")
+	vDate				 = models.CharField(max_length=100 ,blank=True, null=True, verbose_name="Date")
+	User				 = models.ForeignKey(User, null= True, blank= True, on_delete=models.CASCADE, verbose_name="Usuario")
+
+	def __str__(self):
+
+		return self.vExpenseDescription

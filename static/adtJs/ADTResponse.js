@@ -33,6 +33,13 @@ ADTResponse.prototype.addexpenseResponse = function(data){
 	}
 }
 
+ADTResponse.prototype.addexpensedateResponse = function(data){
+	//console.log(data);
+	if(data.Status == 'OK'){
+		console.log("cuenta agregada");
+	}
+}
+
 ADTResponse.prototype.updateexpenseResponse = function(data){
 
 	//console.log(data);
@@ -50,6 +57,15 @@ ADTResponse.prototype.updateexpenseResponse = function(data){
 		adtExpenses.expenses();
 	}
 }
+
+ADTResponse.prototype.updateexpensedateResponse = function(data){
+
+	//console.log(data);
+	if(data.Status == 'OK'){
+		console.log("cuenta modificada");
+	}
+}
+
 
 ADTResponse.prototype.deleteexpenseResponse = function(data){
 
@@ -84,6 +100,13 @@ ADTResponse.prototype.sendbalanceResponse = function(data){
 		localStorage.expensesCatalogDict = JSON.stringify(expensesCatalog);
 		adtExpenses.expenses();
 		console.log(localStorage.expensesCatalogDict);
+	}
+}
+
+ADTResponse.prototype.sendbalancedateResponse = function(data){
+
+	if(data.Status == 'OK'){
+		console.log("gasto registrado");
 	}
 }
 

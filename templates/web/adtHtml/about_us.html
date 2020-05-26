@@ -3,147 +3,487 @@
 <html lang="en">
 
 <head>
-
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Acerca de AdTomin</title>
+  <meta name="description" content="Free Bootstrap Theme by BootstrapMade.com">
+  <meta name="keywords" content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
 
-
-  <!--<script src="{% static  'vendor/jquery/jquery.min.js' %}"></script>-->
-  <script src="{% static 'adtJs/jquery-1.10.2.min.js'%}"></script>
-  <script type="text/javascript"> window.CSRF_TOKEN = "{{ csrf_token }}"; </script>
-  <script type="text/javascript"> window.USERNAME = "{{user.username}}"; </script>
-  <script src="{% static 'adtJs/ADTString.js'%}"></script>
-  <script src="{% static 'adtJs/ADTRequest.js'%}"></script>
-  <script src="{% static 'adtJs/ADTResponse.js'%}"></script>
-  <script src="{% static 'adtJs/ADTGeneral.js'%}"></script>
-  <script src="{% static 'adtJs/ADTExpenses.js'%}"></script>
-
-  <title>AdTomin</title>
-
-  <!-- Custom fonts for this template-->
-  <link href="{% static 'vendor/fontawesome-free/css/all.min.css'%}" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
-  <!-- Custom styles for this template-->
-  <link href="{% static 'adtCss/sb-admin-2.min.css'%}" rel="stylesheet">
-  <link href="{% static 'adtCss/adtGeneral.css'%}" rel="stylesheet">
-
-
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans|Candal|Alegreya+Sans">
+  <link rel="stylesheet" type="text/css" href="{% static 'vendor/fontawesome-free/css/font-awesome.min.css'%}">
+  <link rel="stylesheet" type="text/css" href="{% static 'adtCss/bootstrap.min.css'%}">
+  <link rel="stylesheet" type="text/css" href="{% static 'adtCss/imagehover.min.css'%}">
+  <link rel="stylesheet" type="text/css" href="{% static 'adtCss/style.css'%}">
+  <!-- =======================================================
+    Theme Name: Mentor
+    Theme URL: https://bootstrapmade.com/mentor-free-education-bootstrap-theme/
+    Author: BootstrapMade.com
+    Author URL: https://bootstrapmade.com
+  ======================================================= -->
 </head>
 
-<body id="page-top">
-
-  <!-- Page Wrapper -->
-  <div id="wrapper">
-
-    <!-- Sidebar -->
-    <div id="sidebar">
-    </div>
-    <!-- End of Sidebar -->
-
-    <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
-
-      <!-- Main Content -->
-      <div id="content">
-
-        <!-- Topbar -->
-        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-          <!-- Topbar Navbar -->
-          <ul class="navbar-nav ml-auto">
-            <!-- Nav Item - Alerts -->
-            <li id="itemAlerts" class="nav-item dropdown no-arrow mx-1">
-            </li>
-
-            <div class="topbar-divider d-none d-sm-block"></div>
-
-            <!-- Nav Item - User Information -->
-            <li id="itemUser" class="nav-item dropdown no-arrow">
-              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{user.username}}</span>
-                <img class="img-profile rounded-circle" src="https://pngimage.net/wp-content/uploads/2018/05/default-profile-pic-png-8.png">
-              </a>
-              <!-- Dropdown - User Information -->
-              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Profile
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Settings
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Activity Log
-                </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Logout
-                </a>
-            </li>
-          </ul>
-        </nav>
-        <!-- End of Topbar -->
-
-        <!-- Begin Page Content -->
-        <div class="container-fluid">
-
-
-
-        </div>
-
+<body>
+  <!--Navigation bar-->
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/AboutUs">Ad<span>Tomin</span></a>
       </div>
-      <!-- End Main Content -->
-
-      <!-- Footer -->
-      <footer class="sticky-footer bg-white">
-        <div class="container my-auto">
-          <div class="copyright text-center my-auto">
-            <span>Copyright &copy; AdTomin 2020</span>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#Objetivos">Objetivos</a></li>
+          <li><a href="#Actores">Actores</a></li>
+          <li><a href="#Documentos">Documentos</a></li>
+          <li><a href="#Interfaces">Interfaces</a></li>
+          
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!--/ Navigation bar-->
+  <!--Banner-->
+  <div class="banner">
+    <div class="bg-color">
+      <div class="container">
+        <div class="row">
+          <div class="banner-text text-center">
+            <div class="text-border">
+              <h2 class="text-dec">Plataforma Web de Educación Financiera</h2>
+            </div>
+            <div class="intro-para text-center quote">
+              <p class="big-text">Descripción del Proyecto</p>
+              <p class="small-text">Se pretende realizar una plataforma web de educación financiera  que ofrece herramientas para llevar un control sobre el registro de egresos e ingresos,donde se muestran los datos recabados en gráficos. Además de un módulo de metas de ahorro que permite elegir el modo de escatimar tus ingresos.</p>
+              <a href="/home" target="_blank" class="btn get-quote">Probar Plataforma</a> <!--Dirigir a Adtomin-->
+            </div>
+            <a href="#Objetivos" class="mouse-hover">
+              <div class="mouse"></div>
+            </a>
           </div>
         </div>
-      </footer>
-      <!-- End of Footer -->
-
+      </div>
     </div>
-    <!-- End of Content Wrapper -->
-
   </div>
-  <!-- End of Page Wrapper -->
+  <!--/ Banner-->
+  <!--Objetivos-->
+  <section id="Objetivos" class="section-padding">
+    <div class="container">
+      <div class="row">
+        <div class="header-section text-center">
+          <h2>Objetivos</h2>
+          <p>Ofrecer a los usuarios de la plataforma una visión más amplia de sus ingresos y egresos permitiéndoles,  con base en la información que ingresen en la plataforma, tener alternativas y la oportunidad de tomar mejores decisiones de cómo planificar su presupuesto.
+          </p>
+          <hr class="bottom-line">
+        </div>
+        <div class="feature-info">
+          <div class="fea">
+            <div class="col-md-4">
+              <div class="heading pull-right">
+                <h4>Meta de Ahorro</h4>
+                <p>Aplicar metas de ahorro para que el usuario llegue a cierta cantidad de dinero en un determinado tiempo.</p>
+              </div>
+              <div class="fea-img pull-left">
+                <i class="fa fa-hourglass "></i>
+              </div>
+            </div>
+          </div>
+          <div class="fea">
+            <div class="col-md-4">
+              <div class="heading pull-right">
+                <h4>Estadísticas</h4>
+                <p>La plataforma creará un gráfico de los egresos del usuario para que el usuario tenga una estadística de sus gastos.
+                </p>
+              </div>
+              <div class="fea-img pull-left">
+                <i class="fa fa-pie-chart "></i>
+              </div>
+            </div>
+          </div>
+          <div class="fea">
+            <div class="col-md-4">
+              <div class="heading pull-right">
+                <h4>Recomendaciones</h4>
+                <p>Se realizará una ponderación de todos los gastos ingresados por el usuario de tal forma que se le puedan hacer recomendaciones sobre el manejo de su dinero.</p>
+              </div>
+              <div class="fea-img pull-left">
+                <i class="fa Example of comment fa-comment"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--/ objetivos-->
 
+  <!--Actores-->
+  <section id="Actores" class="section-padding">
+    <div class="container">
+      <div class="row">
+        <div class="header-section text-center">
+          <h2>Cronograma</h2>
+          <input type="button" value="Mostrar Cronograma" onclick="genera_tabla()">
+          <hr class="bottom-line">
+        </div>
+        <div class="col-md-4 col-sm-6">
+          <div class="service-box text-center">
+            <div class="icon-box">
+              <i class="fa fa-html5 color-green"></i>
+            </div>
+            <div class="icon-text">
+              <h4 class="ser-text"> Stakeholders</h4>
+                <br><b>Usuarios:</b> Toda aquella población interesada en aprender a gestionar mejor sus ingresos y egresos.</br>
+                <br><b>Socios del negocio:</b> Como socios del negocio se tiene contemplado una empresa de “Hosting” para alojar la plataforma web</br>
+                <br><b><p>Esquema de desarrollo:</p></b> 
+                <p>Administrador: Es el encargado de gestionar todo el desarrollo del proyecto.</p>
+                <p>Desarrolladores: Encargados de documentar e implementar los requerimientos, para cumplir con las especificaciones deseadas.</p></br>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6">
+          <div class="service-box text-center">
+            <div class="icon-box">
+              <i class="fa fa-users color-green"></i>
+            </div>
+            <div class="icon-text">
+              <h4 class="ser-text">Actores</h4>
+            </div>
+            <br>Los actores de un un sistema en el desarrollo de software son todas aquellas entidades que interactúan directamente con el sistema:
+              <p><b>Usuario</b></p>
+              <p><b>Administrador</b></p>
+            </br>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6">
+          <div class="service-box text-center">
+            <div class="icon-box">
+              <i class="fa fa-joomla color-green"></i>
+            </div>
+            <div class="icon-text">
+              <h4 class="ser-text">Procesos de Modelo</h4>
+              <br>
+                Para la elaboración de la plataforma se ha decidido utilizar el modelo de proceso iterativo, su justificación está basada en que, al ser una plataforma que maneja información sino delicada pero que sí es de mucha importancia para alcanzar el objetivo que tiene la plataforma, es necesario ir generando prototipos de esta, funcionales que nos ayuden a identificar las características de la plataforma que deben cambiarse o añadirse. Aunado a lo anterior, el tiempo que se tiene para la elaboración de este proyecto es corto por lo tanto con el proceso iterativo nos aseguramos de entregar una plataforma que tenga los suficientes elementos que permitan su uso.
+              </br>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--Actores-->
+  <!--Documentos-->
+  <section id="Documentos" class="section-padding">
+    <div class="container">
+      <div class="row">
+        <div class="header-section text-center">
+          <h2>Documentos</h2>
+          <p>A continuacion se adjunta los documentos que muestran la estructura del proyecto.</p>
+          <hr class="bottom-line">
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+          <div class="pm-staff-profile-container">
+            <div class="pm-staff-profile-image-wrapper text-center">
+            <div class="icon-box">
+              <i class="fa fa-briefcase"></i>
+            </div>
+            </div>
+            <div class="pm-staff-profile-details text-center">
+              <p class="pm-staff-profile-name">Reglas del Negocio</p>
+              <p class="pm-staff-profile-bio">Aquí esta la documentación acerca de las reglas del negocio utilziadas. </p>
+              <a href="static/docs/ReglasNegocio.pdf" target="_blank"> <i class="fa fa-file-pdf-o"></i>Reglas del Negocio</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+          <div class="pm-staff-profile-container">
+            <div class="pm-staff-profile-image-wrapper text-center">
+              <div class="icon-box">
+                <i class="fa fa-paperclip "></i>
+              </div>
+            </div>
+            <div class="pm-staff-profile-details text-center">
+              <p class="pm-staff-profile-name">Requerimientos del Sistema</p>
 
-   <!-- Expense Modal-->
-  <div class="modal fade" id="expenseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  </div>
+              <p class="pm-staff-profile-bio">Aquí esta la documentación de los requerimientos del sistema.</p>
+              <a href="static/docs/Requerimientos.pdf" target="_blank"><i class="fa fa-file-pdf-o"></i>Requerimientos del Sistema</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+          <div class="pm-staff-profile-container">
+            <div class="pm-staff-profile-image-wrapper text-center">
+              <div class="icon-box">
+                <i class="fa fa-search "></i>
+              </div>
+            </div>
+            <div class="pm-staff-profile-details text-center">
+              <p class="pm-staff-profile-name">Casos de Uso</p>
+              <p class="pm-staff-profile-bio">Aquí esta la documentación de los casos de uso del sistema. </p>
+              <a href="static/docs/Casos_de_uso.pdf" target="_blank"><i class="fa fa-file-pdf-o"></i>Casos de uso</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--/ Faculity member-->
+  <!-- Testimonial-->
+  <!-- <section id="testimonial" class="section-padding">
+    <div class="container">
+      <div class="row">
+        <div class="header-section text-center">
+          <h2 class="white">See What Our Customer Are Saying?</h2>
+          <p class="white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem nesciunt vitae,<br> maiores, magni dolorum aliquam.</p>
+          <hr class="bottom-line bg-white">
+        </div>
+        <div class="col-md-6 col-sm-6">
+          <div class="text-comment">
+            <p class="text-par">"Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, nec sagittis sem"</p>
+            <p class="text-name">Abraham Doe - Creative Dırector</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6">
+          <div class="text-comment">
+            <p class="text-par">"Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, nec sagittis sem"</p>
+            <p class="text-name">Abraham Doe - Creative Dırector</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> -->
+  <!--/ Testimonial -->
+  <!--Interfaces-->
+  <section id="Interfaces" class="section-padding">
+    <div class="container">
+      <div class="row">
+        <div class="header-section text-center">
+          <h2>Interfaces del Sistema</h2>
+          <p>A continuación, se muestran los bocetos de la interfaz,<br> los cuales nos ayudaran a darnos una idea del aspecto final que tendrá el sistema.</p>
+          <hr class="bottom-line">
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 col-sm-6 padleft-right">
+          <figure class="imghvr-fold-up">
+            <img src="static/adtImages/imgDoc/Registro.png" class="img-responsive">
+            <figcaption>
+              <h3>Formulario de registro</h3>
+              <p></p>
+            </figcaption>
+            <a href="#"></a>
+          </figure>
+        </div>
+        <div class="col-md-4 col-sm-6 padleft-right">
+          <figure class="imghvr-fold-up">
+            <img src="static/adtImages/imgDoc/Login.png" height="100px" class="img-responsive">
+            <figcaption>
+              <h3>Login de usuarios</h3>
+              <p></p>
+            </figcaption>
+            <a href="#"></a>
+          </figure>
+        </div>
+        <div class="col-md-4 col-sm-6 padleft-right">
+          <figure class="imghvr-fold-up">
+            <img src="static/adtImages/imgDoc/Inicio.png" class="img-responsive">
+            <figcaption>
+              <h3>Inicio del sistema</h3>
+              <p></p>
+            </figcaption>
+            <a href="#"></a>
+          </figure>
+        </div>
+        <div class="col-md-4 col-sm-6 padleft-right">
+          <figure class="imghvr-fold-up">
+            <img src="static/adtImages/imgDoc/Resumen.png" class="img-responsive">
+            <figcaption>
+              <h3>Apartado de resumen del usuario</h3>
+              <p></p>
+            </figcaption>
+            <a href="#"></a>
+          </figure>
+        </div>
+        <div class="col-md-4 col-sm-6 padleft-right">
+          <figure class="imghvr-fold-up">
+            <img src="static/adtImages/imgDoc/cuentas.png" class="img-responsive">
+            <figcaption>
+              <h3>Apartado de Cuentas del usuario</h3>
+              <p></p>
+            </figcaption>
+            <a href="#"></a>
+          </figure>
+        </div>
+        <div class="col-md-4 col-sm-6 padleft-right">
+          <figure class="imghvr-fold-up">
+            <img src="static/adtImages/imgDoc/acercaDe.png" class="img-responsive">
+            <figcaption>
+              <h3>Apartado Acerca de...</h3>
+              <p></p>
+            </figcaption>
+            <a href="#"></a>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--/ interfaces-->
+  <!--Pricing-->
+  <!-- <section id="pricing" class="section-padding">
+    <div class="container">
+      <div class="row">
+        <div class="header-section text-center">
+          <h2>Our Pricing</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem nesciunt vitae,<br> maiores, magni dolorum aliquam.</p>
+          <hr class="bottom-line">
+        </div>
+        <div class="col-md-4 col-sm-4">
+          <div class="price-table">
+            
+            <div class="pricing-head">
+              <h4>Monthly Plan</h4>
+              <span class="fa fa-usd curency"></span> <span class="amount">200</span>
+            </div>
 
-  <!-- Scroll to Top Button-->
-  <a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-  </a>
+            
+            <div class="price-in mart-15">
+              <a href="#" class="btn btn-bg green btn-block">PURCHACE</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-4">
+          <div class="price-table">
+            
+            <div class="pricing-head">
+              <h4>Quarterly Plan</h4>
+              <span class="fa fa-usd curency"></span> <span class="amount">800</span>
+            </div>
 
-  <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  </div>
+            
+            <div class="price-in mart-15">
+              <a href="#" class="btn btn-bg yellow btn-block">PURCHACE</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-4">
+          <div class="price-table">
+            
+            <div class="pricing-head">
+              <h4>Year Plan</h4>
+              <span class="fa fa-usd curency"></span> <span class="amount">1200</span>
+            </div>
 
-  <!-- Bootstrap core JavaScript-->
-  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+            
+            <div class="price-in mart-15">
+              <a href="#" class="btn btn-bg red btn-block">PURCHACE</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> -->
+  <!--/ Pricing-->
+  <!--Contact-->
+  <!-- <section id="contact" class="section-padding">
+    <div class="container">
+      <div class="row">
+        <div class="header-section text-center">
+          <h2>Contact Us</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem nesciunt vitae,<br> maiores, magni dolorum aliquam.</p>
+          <hr class="bottom-line">
+        </div>
+        <div id="sendmessage">Your message has been sent. Thank you!</div>
+        <div id="errormessage"></div>
+        <form action="" method="post" role="form" class="contactForm">
+          <div class="col-md-6 col-sm-6 col-xs-12 left">
+            <div class="form-group">
+              <input type="text" name="name" class="form-control form" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+              <div class="validation"></div>
+            </div>
+            <div class="form-group">
+              <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
+              <div class="validation"></div>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+              <div class="validation"></div>
+            </div>
+          </div>
 
-  <!-- Core plugin JavaScript-->
-  <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js'%}"></script>
+          <div class="col-md-6 col-sm-6 col-xs-12 right">
+            <div class="form-group">
+              <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
+              <div class="validation"></div>
+            </div>
+          </div>
 
-  <!-- Custom scripts for all pages-->
-  <script src="{% static 'adtJs/sb-admin-2.min.js'%}"></script>
+          <div class="col-xs-12">
+            
+            <button type="submit" id="submit" name="submit" class="form contact-form-button light-form-button oswald light">SEND EMAIL</button>
+          </div>
+        </form>
 
-  <!-- Page level plugins -->
-  <script src="{% static 'vendor/chart.js/Chart.min.js'%}"></script>
+      </div>
+    </div>
+  </section> -->
+  <!--/ Contact-->
+  <!--Footer-->
+  <footer id="footer" class="footer">
+    <div class="container text-center">
 
-  <!-- Page level custom scripts -->
-  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+      <!-- <h3>Start Your Free Trial Now!</h3>
+
+      <form class="mc-trial row">
+        <div class="form-group col-md-3 col-md-offset-2 col-sm-4">
+          <div class=" controls">
+            <input name="name" placeholder="Enter Your Name" class="form-control" type="text">
+          </div>
+        </div>
+        
+        <div class="form-group col-md-3 col-sm-4">
+          <div class=" controls">
+            <input name="EMAIL" placeholder="Enter Your email" class="form-control" type="email">
+          </div>
+        </div>
+        
+        <div class="col-md-2 col-sm-4">
+          <p>
+            <button name="submit" type="submit" class="btn btn-block btn-submit">
+            Submit <i class="fa fa-arrow-right"></i></button>
+          </p>
+        </div>
+      </form> -->
+      <!-- End newsletter-form -->
+      <ul class="social-links">
+        <li><a href="#link"><i class="fa fa-twitter fa-fw"></i></a></li>
+        <li><a href="#link"><i class="fa fa-facebook fa-fw"></i></a></li>
+        <li><a href="#link"><i class="fa fa-google-plus fa-fw"></i></a></li>
+        <li><a href="#link"><i class="fa fa-dribbble fa-fw"></i></a></li>
+        <li><a href="#link"><i class="fa fa-linkedin fa-fw"></i></a></li>
+      </ul>
+      ©2016 AdTomin. All rights reserved
+      <div class="credits">
+        <!--
+          All the links in the footer should remain intact.
+          You can delete the links only if you purchased the pro version.
+          Licensing information: https://bootstrapmade.com/license/
+          Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Mentor
+        -->
+        
+      </div>
+    </div>
+  </footer>
+  <!--/ Footer-->
+  <script src="{% static 'adtJs/jsDoc/jquery.min.js' %}"></script>
+  <script src="{% static 'adtJs/jsDoc/jquery.easing.min.js'%}"></script>
+  <script src="{% static 'adtJs/jsDoc/bootstrap.min.js'%}"></script>
+  <script src="{% static 'adtJs/jsDoc/custom.js'%}" ></script>
+  <script src="{% static 'adtJs/jsDoc/contactform.js'%}" ></script>
 
 </body>
 

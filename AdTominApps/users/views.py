@@ -11,10 +11,11 @@ from django.contrib.auth import login as do_login
 from django.contrib.auth.forms import UserCreationForm
 from AdTominApps.users.forms import RegistroForm
 from AdTominApps.users.models import AdtUsers
-from AdTominApps.expenses.models import AdtExpenses
+from AdTominApps.expenses.models import AdtExpenses, AdtExpensesDate
 
 import simplejson
 import json
+import time
 
 import logging
 logger = logging.getLogger(__name__)
@@ -70,16 +71,27 @@ def register(request):
             if user is not None:
                 # Hacemos el login manualmente
                 do_login(request, user)
+                date = time.strftime("%d/%m/%Y")
                 expenses = AdtExpenses(vExpenseDescription='Restaurantes',vExpenseBalance=0,vExpenseColor='e83e8c',vExpenseIcon='fas fa-utensils',User=user)
                 expenses.save()
+                expensesdate = AdtExpensesDate(vExpenseDescription='Restaurantes',vExpenseBalance=0,vDate=date,User=user)
+                expensesdate.save()
                 expenses = AdtExpenses(vExpenseDescription='SuperMercado',vExpenseBalance=0,vExpenseColor='1cc88a',vExpenseIcon='fas fa-shopping-cart',User=user)
                 expenses.save()
+                expensesdate = AdtExpensesDate(vExpenseDescription='SuperMercado',vExpenseBalance=0,vDate=date,User=user)
+                expensesdate.save()
                 expenses = AdtExpenses(vExpenseDescription='Salud',vExpenseBalance=0,vExpenseColor='e74a3b',vExpenseIcon='fas fa-heartbeat',User=user)
                 expenses.save()
+                expensesdate = AdtExpensesDate(vExpenseDescription='Salud',vExpenseBalance=0,vDate=date,User=user)
+                expensesdate.save()
                 expenses = AdtExpenses(vExpenseDescription='Transporte',vExpenseBalance=0,vExpenseColor='4e73df',vExpenseIcon='fas fa-bus',User=user)
                 expenses.save()
+                expensesdate = AdtExpensesDate(vExpenseDescription='Transporte',vExpenseBalance=0,vDate=date,User=user)
+                expensesdate.save()
                 expenses = AdtExpenses(vExpenseDescription='Vestido',vExpenseBalance=0,vExpenseColor='f6c23e',vExpenseIcon='fas fa-tshirt',User=user)
                 expenses.save()
+                expensesdate = AdtExpensesDate(vExpenseDescription='Vestido',vExpenseBalance=0,vDate=date,User=user)
+                expensesdate.save()
                 # Y le redireccionamos a la portada
                 return redirect('/home')
 
@@ -90,17 +102,29 @@ def register(request):
 def addExpense(request):
     resultJSON = {}
     user = User.objects.get(username=request.GET['userName'])
-    currentExpense = AdtExpenses(vExpenseDescription=request.GET['description'],vExpenseBalance=request.GET['balance'],vExpenseColor=request.GET['color'],vExpenseIcon=request.GET['icon'],User=user)
-    currentExpense.save()
+    
+    try:
+        AdtExpenses.objects.get(vExpenseDescription = request.GET['description'])
+        print("YA EXISTE LA CUENTA")
+        resultJSON['Status'] = 'BAD'
+        return resultJSON
 
-    resultJSON["EXID"]   = str(currentExpense.vExpenseId)
-    resultJSON["EXDESC"] = str(currentExpense.vExpenseDescription)
-    resultJSON["EXPBAL"] = str(currentExpense.vExpenseBalance)
-    resultJSON["EXPCOL"] = str(currentExpense.vExpenseColor)
-    resultJSON["EXPICO"] = str(currentExpense.vExpenseIcon)
+    except AdtExpenses.DoesNotExist:
+        print("AGREGANDO CUENTA")
+    
+        currentExpense = AdtExpenses(vExpenseDescription=request.GET['description'],vExpenseBalance=request.GET['balance'],vExpenseColor=request.GET['color'],vExpenseIcon=request.GET['icon'],User=user)
+        currentExpense.save()
+        currentExpenseDate = AdtExpensesDate(vExpenseDescription=request.GET['description'],vExpenseBalance=request.GET['balance'],vDate=request.GET['date'],User=user)
+        currentExpenseDate.save()
 
-    resultJSON['Status'] = 'OK'
-    return resultJSON    
+        resultJSON["EXID"]   = str(currentExpense.vExpenseId)
+        resultJSON["EXDESC"] = str(currentExpense.vExpenseDescription)
+        resultJSON["EXPBAL"] = str(currentExpense.vExpenseBalance)
+        resultJSON["EXPCOL"] = str(currentExpense.vExpenseColor)
+        resultJSON["EXPICO"] = str(currentExpense.vExpenseIcon)
+
+        resultJSON['Status'] = 'OK'
+        return resultJSON     
 
 @json_response
 def updateExpense(request):
@@ -126,12 +150,33 @@ def updateExpense(request):
         resultJSON['Status'] = 'BAD'
         return resultJSON        
 
+@json_response
+def updateExpenseDate(request):
+    resultJSON = {}
+
+    user = User.objects.get(username=request.GET['userName'])
+    expensesCatalog = AdtExpensesDate.objects.filter(User=user,vExpenseDescription = request.GET['descriptionSend'])
+
+    if expensesCatalog:
+        print("MODIFICANDO CUENTA ",request.GET['descriptionSend'], " POR", request.GET['description'])
+        for expense in expensesCatalog:
+            print(expense.vExpenseId)
+            currentExpense = AdtExpensesDate.objects.get(vExpenseId = expense.vExpenseId)
+            currentExpense.vExpenseDescription = request.GET['description']
+            currentExpense.save()
+            
+        resultJSON['Status'] = 'OK'
+        return resultJSON
+
+    print("FALLO LA BUSQUEDA")
+    resultJSON['Status'] = 'BAD'
+    return resultJSON
+
 
 @json_response
 def deleteExpense(request):
     resultJSON = {}
     try:
-
         currentExpense = AdtExpenses.objects.get(vExpenseId = request.GET['expenseId'])
         resultJSON['EXID'] = request.GET['expenseId']
         currentExpense.delete()
@@ -165,7 +210,36 @@ def sendBalance(request):
         resultJSON['Status'] = 'BAD'
         return resultJSON        
 
+@json_response
+def sendBalanceDate(request):
 
+    resultJSON = {}
+    user = User.objects.get(username=request.GET['userName'])
+    print(user)
+    try:
+        currentExpense = AdtExpensesDate.objects.get(vExpenseDescription = request.GET['description'],vDate=request.GET['date'],User = user)
+        print("FECHA DE REGISTRO ENCONTRADO",currentExpense.vDate)
+        print("FECHA DE REGISTRO RECIBIDO",request.GET['date'])
+        print("REGISTRANDO GASTO")
+        balance = round(float(request.GET['balance']),2)
+        currentExpense.vExpenseBalance += balance
+        print(currentExpense.vExpenseBalance)
+        currentExpense.save()
+        resultJSON["Status"] = 'OK'
+        
+        return resultJSON
+
+    except AdtExpensesDate.DoesNotExist:
+        
+        print("REGISTRO NO ENCONTRADO")
+        print("FECHA DE REGISTRO RECIBIDO",request.GET['date'])
+        print("CREANDO REGISTRO CON NUEVA FECHA")
+        balance = round(float(request.GET['balance']),2)
+        currentExpense = AdtExpensesDate(vExpenseDescription=request.GET['description'],vExpenseBalance=balance,vDate=request.GET['date'],User=user)
+        currentExpense.save()       
+        resultJSON["Status"] = 'OK'
+        
+        return resultJSON
 
 @json_response
 def listExpenses(request):
@@ -190,6 +264,9 @@ def listExpenses(request):
 
 def welcome(request):
     return render(request,'web/adtHtml/index.html')
+
+def aboutUs(request):
+    return render(request,'web/adtHtml/about_us.html')
 
 """
 def login(request):

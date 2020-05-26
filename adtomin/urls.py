@@ -22,6 +22,7 @@ from django.contrib.auth.decorators import login_required
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^home',login_required(views.welcome)),
+    url(r'^AboutUs',views.aboutUs),
     #url(r'^register',views.RegistroUsuario.as_view(), name="registrar"),
     url(r'^register',views.register, name="registrar"),
     #url(r'^login', views.login,name='login'),
@@ -36,8 +37,10 @@ urlpatterns = [
     url(r'^GetExpenses/',views.listExpenses, name="getExpenses"),
     url(r'^AddExpense/',login_required(views.addExpense), name="addExpense"),
     url(r'^UpdateExpense/',login_required(views.updateExpense), name="updateExpense"),
+    url(r'^UpdateExpenseDate/',login_required(views.updateExpenseDate), name="updateExpenseDate"),
     url(r'^DeleteExpense/',login_required(views.deleteExpense), name="deleteExpense"),
     url(r'^SendBalance/',login_required(views.sendBalance), name="sendBalance"),
+    url(r'^SendBalanceDate/',login_required(views.sendBalanceDate), name="sendBalanceDate"),
     #url(r'^login',views.login),
     #url(r'^logout',views.logout),
 ]
