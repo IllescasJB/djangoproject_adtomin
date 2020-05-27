@@ -11,7 +11,7 @@ ADTGeneral.prototype.sideBar = function() {
 	//htmlContent += '			<i class="fas fa-laugh-wink"></i>';
 	htmlContent += '		</div>';
 	htmlContent += '		<div class="sidebar-brand-text mx-3">';
-	htmlContent += '			<img src="static/adtImages/AdTomin_logo_white.png" class="logo">' 
+	htmlContent += '			<img src="static/adtImages/AdTomin_logo.png" class="logo">' 
 	htmlContent += '		</div>';
 	htmlContent += '	</a>';
 	htmlContent += '	<hr class="sidebar-divider my-0">';
