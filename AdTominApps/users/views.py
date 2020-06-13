@@ -10,7 +10,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as do_login
 from django.contrib.auth.forms import UserCreationForm
 from AdTominApps.users.forms import RegistroForm
-from AdTominApps.users.models import AdtUsers
+from AdTominApps.users.models import AdtUsers, AdtAccounts
 from AdTominApps.expenses.models import AdtExpenses, AdtExpensesDate
 
 import simplejson
@@ -262,7 +262,59 @@ def listExpenses(request):
         resultJSON['Status'] = 'OK'
         return resultJSON
 
+@json_response
+def getAccounts(request):
+    resultJSON = {}
+    user = User.objects.get(username = request.GET['userName'])
+
+    accountsCatalog = AdtAccounts.objects.filter(User=user)
+    print("CUENTAS INGRESO ENCONTRADAS",accountsCatalog)
+    if accountsCatalog:
+        accountsCatalogDic = []
+        for account in accountsCatalog:
+            currentObject = {}
+            currentObject["ACID"] = str(account.vAccountId)
+            currentObject["ACDESC"] = str(account.vAccountDescription)
+            currentObject["ACBAL"] = str(account.vAccountBalance)
+            accountsCatalogDic.append(currentObject)
+
+        resultJSON['accountsCatalogDic'] = accountsCatalogDic
+        print(accountsCatalogDic)
+        resultJSON['Status'] = 'OK'
+        return resultJSON
+    else:
+        print("NO EXISTE NINGUNA CUENTA, POR FAVOR CREE UNA")
+        resultJSON['Status'] = 'BAD'
+        return resultJSON
+
+@json_response
+def addAccount(request):
+    resultJSON = {}
+    user = User.objects.get(username = request.GET['userName'])
+
+    try:
+        AdtAccounts.objects.get(vAccountDescription = request.GET['description'])
+        print("YA EXISTE LA CUENTA")
+        resultJSON['Status'] = 'BAD'
+        return resultJSON
+
+    except AdtAccounts.DoesNotExist:
+        print("AGREGANDO CUENTA")
+    
+        currentAccount = AdtAccounts(vAccountDescription=request.GET['description'],vAccountBalance=request.GET['balance'],User=user)
+        currentAccount.save()
+
+        resultJSON["ACID"]   = str(currentAccount.vAccountId)
+        resultJSON["ACDESC"] = str(currentAccount.vAccountDescription)
+        resultJSON["ACBAL"]  = str(currentAccount.vAccountBalance)
+
+        resultJSON['Status'] = 'OK'
+        return resultJSON 
+
+
+
 def welcome(request):
+    print("Usuario:",User)
     return render(request,'web/adtHtml/index.html')
 
 def aboutUs(request):

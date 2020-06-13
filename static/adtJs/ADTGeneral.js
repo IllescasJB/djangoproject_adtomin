@@ -177,6 +177,7 @@ $(document).ready(function(){
 	adtGeneral.navItemAlerts();
 	//adtGeneral.navItemUserInformation();
 	adtGeneral.logoutModal();
+	adtAccounts.getAccounts();
 	adtExpenses.getExpenses();
 	//adtGeneral.askExpenses();
 

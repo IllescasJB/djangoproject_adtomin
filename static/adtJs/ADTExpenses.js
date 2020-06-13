@@ -95,7 +95,7 @@ ADTExpenses.prototype.expenseEdit = function(id,expense,color,action){
 		htmlContent += '					<input class="form-control" type="text" id="description" value="">';
 	}
 	htmlContent += '					</div>';
-	htmlContent += '				</div>'
+	htmlContent += '				</div>';
 	htmlContent += '				<div class="form-group row">';
 	htmlContent += '					<label for="color" class="col-sm-5 col-form-label">Seleccione Color: </label>';
 	htmlContent += '					<div class="col-sm-5">';
@@ -287,9 +287,9 @@ ADTExpenses.prototype.pieChart = function() {
 
 	var htmlContent= '';
 
-	htmlContent += '<div id="pieChart" class="conteiner card shadow mb-4">';
-	htmlContent += '	<div class="chart-pie pt-4 pb-2">';
-	htmlContent += '		<canvas id="chartContainer" style="height: 300px; width: 100%;"></canvas>';
+	htmlContent += '<div id="pieChart" class="conteiner card shadow mb-4 conteinerCard">';
+	htmlContent += '	<div class="chart-pie pt-1 pb-2">';
+	htmlContent += '		<canvas id="chartContainer" style="height: 380px; width: 100%;"></canvas>';
 	htmlContent += '	</div>';
 	/*
 	htmlContent += '	<div class="mt-4 text-center small">';
@@ -307,40 +307,89 @@ ADTExpenses.prototype.pieChart = function() {
 	htmlContent += '</div>';
 
 	document.getElementById("mainContent").innerHTML+= htmlContent;
-	chart();
+	chartDonut();
 }
 
-function chart(){
+function chartDonut(){
+	expensesCatalog = JSON.parse(localStorage.expensesCatalogDict);
+	var expensesDescription = [];
+	var expensesBalance = [];
+	var expensesColor = []
+	var entry = 1000;
+	for(expense in expensesCatalog){
+		if(expensesCatalog[expense].EXPBAL != 0){
+			expensesDescription.push(expensesCatalog[expense].EXDESC);
+		}
+	}
+	expensesDescription.push("IngresoRestante");
+	for(expense in expensesCatalog){
+		if(expensesCatalog[expense].EXPBAL != 0){
+			entry = entry - expensesCatalog[expense].EXPBAL;
+			expensesBalance.push(expensesCatalog[expense].EXPBAL);
+		}
+	}
+	expensesBalance.push(entry);
+	for(expense in expensesCatalog){
+		if(expensesCatalog[expense].EXPBAL != 0){
+			expensesColor.push("#" + expensesCatalog[expense].EXPCOL);
+		}
+	}
+	expensesColor.push("#0F9246");	
 	var ctx = document.getElementById("chartContainer");
 	var myChart = new Chart(ctx, {
   		type: 'pie',
   		data: {
-    		labels: ['OK', 'WARNING', 'CRITICAL', 'UNKNOWN'],
+    		labels: expensesDescription,
     		datasets: [{
-      			label: '# of Tomatoes',
-      			data: [12, 19, 3, 5],
-      			backgroundColor: [
-        			'rgba(255, 99, 132, 0.5)',
-        			'rgba(54, 162, 235, 0.2)',
-        			'rgba(255, 206, 86, 0.2)',
-        			'rgba(75, 192, 192, 0.2)'
-      			],
-      			borderColor: [
-        			'rgba(255,99,132,1)',
-        			'rgba(54, 162, 235, 1)',
-        			'rgba(255, 206, 86, 1)',
-        			'rgba(75, 192, 192, 1)'
-      			],
-      			borderWidth: 1
+      			//label: '# of Tomatoes',
+      			data: expensesBalance,
+      			backgroundColor: expensesColor,
+      			borderColor: expensesColor,
+      			borderWidth: 3,
+      			hoverBorderWidth: 15,
     		}]
   		},
   		options: {
    			cutoutPercentage: 60,
     		responsive: true,
-  		}
+    		zoomOutPercentage: 55, // makes chart 40% smaller (50% by default, if the preoprty is undefined)
+            legend: {
+				display: true,
+               	position: 'left',
+               	padding: 10,
+               	labels: {
+                	fontFamily: 'Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"',
+                	fontSize: 15
+            	}
+           	},
+           	layout: {
+            	padding: {
+                	left: 50,
+                	right: 0,
+                	top: 20,
+                	bottom: 70
+            	}
+        	},	
+            plugins: {
+                outlabels: {
+                    //text: '%l %p',
+                    color: 'white',
+                    stretch: 15,
+                    font: {
+                        resizable: false,
+                        minSize: 12,
+                        maxSize: 18,
+                        family: 'Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"'
+                    },
+                    borderRadius:10,
+            	}
+            }
+            	
+   		},
 	});
 }
 
+ 
 $(document).ready(function(){ 
 
 

@@ -110,5 +110,16 @@ ADTResponse.prototype.sendbalancedateResponse = function(data){
 	}
 }
 
+ADTResponse.prototype.getaccountsResponse = function(data){
+
+	if(data.Status == 'OK'){
+		console.log("Bienvenido");
+		localStorage.accountsCatalogDict = JSON.stringify(data.accountsCatalogDict);
+	}else{
+		console.log("Por favor registre una cuenta de ingreso");
+		adtAccounts.createAccount("newRegister");
+	}
+}
+
 
 var adtResponse = new ADTResponse();

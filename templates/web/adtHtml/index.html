@@ -120,7 +120,11 @@
 
 
    <!-- Expense Modal-->
-  <div class="modal fade" id="expenseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="expenseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  </div>
+
+  <!-- Account Modal -->
+  <div id="accountModal"> 
   </div>
 
   <!-- Scroll to Top Button-->
@@ -143,7 +147,7 @@
 
   <!-- Page level plugins -->
   <script src="{% static 'adtJs/chart.js/Chart.bundle.min.js'%}"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-piechart-outlabels"></script>
   <!-- Page level custom scripts -->
   <script src="{% static 'adtJs/demo/chart-area-demo.js'%}"></script>
   <script src="{% static 'adtJs/demo/chart-pie-demo.js'%}"></script>

@@ -41,6 +41,7 @@ urlpatterns = [
     url(r'^DeleteExpense/',login_required(views.deleteExpense), name="deleteExpense"),
     url(r'^SendBalance/',login_required(views.sendBalance), name="sendBalance"),
     url(r'^SendBalanceDate/',login_required(views.sendBalanceDate), name="sendBalanceDate"),
+    url(r'^GetAccounts/',views.getAccounts, name="getAccounts"),
     #url(r'^login',views.login),
     #url(r'^logout',views.logout),
 ]
